@@ -34,7 +34,7 @@ public class AppMain {
 //      appkey的名称
         String appkey = args.length > 0 ? args[0] : "gmall";
 //		循环遍历次数
-        int loop_len = args.length > 1 ? Integer.parseInt(args[1]) : 10 * 100;
+        int loop_len = args.length > 1 ? Integer.parseInt(args[1]) : 100 * 100;
 //		mid的长度
         int mid_length = args.length > 2 ? Integer.parseInt(args[2]) : 4;
 //		uid的长度
@@ -153,7 +153,7 @@ public class AppMain {
                     i + "",millis + "|" + json.toJSONString()));
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(600);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -222,8 +222,8 @@ public class AppMain {
                 appBase.setMd("Huawei-" + rand.nextInt(20));
                 break;
             case 2:
-                appBase.setBa("HTC");
-                appBase.setMd("HTC-" + rand.nextInt(20));
+                appBase.setBa("Mi");
+                appBase.setMd("Mi-" + rand.nextInt(20));
                 break;
         }
 
