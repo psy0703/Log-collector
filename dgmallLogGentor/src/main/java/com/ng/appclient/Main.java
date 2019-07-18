@@ -89,7 +89,7 @@ public class Main {
 
             //kafka 生产者 发送消息
             producer.send(new ProducerRecord<String, String>("dgmall_log",
-                    i + "",millis + "|" + commonFields.toJSONString()));
+                    i + "",commonFields.toJSONString()));
 
             try {
                 Thread.sleep(600);
