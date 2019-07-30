@@ -10,6 +10,7 @@ public class AppReleaseVideo {
     private String video_id;    //视频id
     private String video_desc;  //视频描述
     private String video_tag;   //视频类型
+    private String video_child_tag;   //视频类型
     private String video_long;  //视频时长
     private String music_name;  //配乐名字
     private String music_write; //配乐作者
@@ -58,6 +59,14 @@ public class AppReleaseVideo {
 
     public String getMusic_name() {
         return music_name;
+    }
+
+    public String getVideo_child_tag() {
+        return video_child_tag;
+    }
+
+    public void setVideo_child_tag(String video_child_tag) {
+        this.video_child_tag = video_child_tag;
     }
 
     public void setMusic_name(String music_name) {

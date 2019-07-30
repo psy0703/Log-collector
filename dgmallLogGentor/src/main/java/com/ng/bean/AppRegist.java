@@ -6,6 +6,7 @@ package com.ng.bean;
  * @Date: 2019/7/17 11:15
  */
 public class AppRegist {
+    private String user_id;    //用户id
     private String user_phone; //用户手机号码
     private String referren_phone;  //推荐人手机号码
     private String app_version;     //APP版本
@@ -14,6 +15,14 @@ public class AppRegist {
     private String user_agent;      //手机agent
     private String screen_width;    //手机屏幕宽度
     private String getScreen_heith; //手机屏幕高度
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
 
     public String getUser_phone() {
         return user_phone;

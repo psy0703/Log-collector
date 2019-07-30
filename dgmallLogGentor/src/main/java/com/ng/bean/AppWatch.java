@@ -7,22 +7,11 @@ package com.ng.bean;
  */
 public class AppWatch {
     private String trace_id;    //由推荐引擎生成：appid.场景id.方案id.分桶id
-    private String alg_match;   //召回层策略，由推荐引擎生成
-    private String alg_rank;    //排序层策略，由推荐引擎生成
-    private String rule;        //规则层策略，由推荐引擎生成
-//    private String action;      //具体行为
-    private String  bhv_amt;    //如果是推荐引导，取值推荐列表的展现次序
+    private String  order;    //如果是推荐引导，取值推荐列表的展现次序
     private String user_id;     //用户ID
     private String video_id;    //视频ID
     private String video_user_id;//视频作者ID
-    private String video_desc;   //视频描述
-    private String video_tag;    //视频标签
     private String watch_time_long;//观看视频时长
-    private String video_long;      //视频时长
-    private String music_name;      //音乐名字
-    private String music_write;     //音乐作者
-    private String video_topic;     //视频主题
-    private String video_address;   //视频地址
     private String is_attention;    //是否关注（0代表无、1代表有）
     private String is_like;         //是否点赞（0代表无、1代表有）
     private String is_comment;      //是否评论（0代表无、1代表有）
@@ -48,44 +37,12 @@ public class AppWatch {
         this.trace_id = trace_id;
     }
 
-    public String getAlg_match() {
-        return alg_match;
+    public String getOrder() {
+        return order;
     }
 
-    public void setAlg_match(String alg_match) {
-        this.alg_match = alg_match;
-    }
-
-    public String getAlg_rank() {
-        return alg_rank;
-    }
-
-    public void setAlg_rank(String alg_rank) {
-        this.alg_rank = alg_rank;
-    }
-
-    public String getRule() {
-        return rule;
-    }
-
-    public void setRule(String rule) {
-        this.rule = rule;
-    }
-
-  /*  public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
-    }*/
-
-    public String getBhv_amt() {
-        return bhv_amt;
-    }
-
-    public void setBhv_amt(String bhv_amt) {
-        this.bhv_amt = bhv_amt;
+    public void setOrder(String order) {
+        this.order = order;
     }
 
     public String getUser_id() {
@@ -112,21 +69,6 @@ public class AppWatch {
         this.video_user_id = video_user_id;
     }
 
-    public String getVideo_desc() {
-        return video_desc;
-    }
-
-    public void setVideo_desc(String video_desc) {
-        this.video_desc = video_desc;
-    }
-
-    public String getVideo_tag() {
-        return video_tag;
-    }
-
-    public void setVideo_tag(String video_tag) {
-        this.video_tag = video_tag;
-    }
 
     public String getWatch_time_long() {
         return watch_time_long;
@@ -136,45 +78,6 @@ public class AppWatch {
         this.watch_time_long = watch_time_long;
     }
 
-    public String getVideo_long() {
-        return video_long;
-    }
-
-    public void setVideo_long(String video_long) {
-        this.video_long = video_long;
-    }
-
-    public String getMusic_name() {
-        return music_name;
-    }
-
-    public void setMusic_name(String music_name) {
-        this.music_name = music_name;
-    }
-
-    public String getMusic_write() {
-        return music_write;
-    }
-
-    public void setMusic_write(String music_write) {
-        this.music_write = music_write;
-    }
-
-    public String getVideo_topic() {
-        return video_topic;
-    }
-
-    public void setVideo_topic(String video_topic) {
-        this.video_topic = video_topic;
-    }
-
-    public String getVideo_address() {
-        return video_address;
-    }
-
-    public void setVideo_address(String video_address) {
-        this.video_address = video_address;
-    }
 
     public String getIs_attention() {
         return is_attention;

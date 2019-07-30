@@ -6,6 +6,7 @@ package com.ng.bean;
  * @Date: 2019/7/17 11:15
  */
 public class AppAddHome {
+    private String user_id;           //用户id
     private String hometown_province; //家乡所在省
     private String hometown_city;       //家乡所在市
     private String hometown_area;       //家乡所在区
@@ -15,6 +16,14 @@ public class AppAddHome {
     private String GPS_city;        //定位所在市
     private String GPS_area;        //定位所在区
     private String GPS_town;        //定位所在镇
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
 
     public String getHometown_province() {
         return hometown_province;

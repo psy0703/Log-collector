@@ -6,6 +6,7 @@ package com.ng.bean;
  * @Date: 2019/7/17 11:15
  */
 public class AppLogin {
+    private String user_id;    //用户id
     private String login_type; //登陆类型 0 password_login/ 1 message_login/ 2 weixin_login
     private String user_phone; //用户手机号码
     private String app_version; //app版本
@@ -14,6 +15,14 @@ public class AppLogin {
     private String user_agent;  //手机agent
     private String screen_width;//手机屏幕宽度
     private String screen_heigh;//手机屏幕高度
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
 
     public String getLogin_type() {
         return login_type;

@@ -43,10 +43,10 @@ public class Main {
 
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(props);
 
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 1000000; i++) {
             JSONObject commonFields = generaCommonFields();
 
-            int flag = rand.nextInt(6);
+            int flag = rand.nextInt(8);
             switch (flag) {
                 case (0):
                     commonFields.put("Type","watch_video");
@@ -79,6 +79,12 @@ public class Main {
                     commonFields.put("Properties",generaGift());
                     break;
 
+                case (6):
+                    commonFields.put("Type","release");
+                    commonFields.put("Event","release");
+                    commonFields.put("Properties",generaRelease());
+                    break;
+
             }
 
 //          时间
@@ -92,7 +98,7 @@ public class Main {
                     i + "",commonFields.toJSONString()));
 
             try {
-                Thread.sleep(600);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -153,21 +159,11 @@ public class Main {
     static JSONObject generaWatch(){
         AppWatch appWatch = new AppWatch();
         appWatch.setTrace_id("app" + rand.nextInt(3)+".scenes" + rand.nextInt(10)+ ".plan" + rand.nextInt(3)+".bucket" + rand.nextInt(4));
-        appWatch.setAlg_match("match"+rand.nextInt(4));
-        appWatch.setAlg_rank("rank" +rand.nextInt(3));
-        appWatch.setRule("rule" + rand.nextInt(5));
-        appWatch.setBhv_amt(Integer.toString(rand.nextInt(5)));
+        appWatch.setOrder(Integer.toString(rand.nextInt(5)));
         appWatch.setUser_id(getRandomDigits(4));
         appWatch.setVideo_id(getRandomDigits(5));
         appWatch.setVideo_user_id(getRandomDigits(4));
-        appWatch.setVideo_desc(getCONTENT(6));
-        appWatch.setVideo_tag(getCONTENT(2));
         appWatch.setWatch_time_long(getRandomDigits(2));
-        appWatch.setVideo_long(getRandomDigits(3));
-        appWatch.setMusic_name(getCONTENT(4));
-        appWatch.setMusic_write(getCONTENT(3));
-        appWatch.setVideo_topic(getCONTENT(3));
-        appWatch.setVideo_address(getRandomCharAndNumr(8));
         appWatch.setIs_attention(Integer.toString(rand.nextInt(2)));
         appWatch.setIs_like(Integer.toString(rand.nextInt(2)));
         appWatch.setIs_comment(Integer.toString(rand.nextInt(2)));
@@ -176,12 +172,32 @@ public class Main {
         appWatch.setIs_share_qq(Integer.toString(rand.nextInt(2)));
         appWatch.setIs_save(Integer.toString(rand.nextInt(2)));
         appWatch.setIs_get_red_packets(Integer.toString(rand.nextInt(2)));
+        if ("1".equals(appWatch.getIs_get_red_packets())){
+            appWatch.setRed_packets_sum(Integer.toString(rand.nextInt(1000)));
+        }else{
+            appWatch.setRed_packets_sum("0");
+        }
         appWatch.setIs_copy_site(Integer.toString(rand.nextInt(2)));
         appWatch.setIs_report("0");
-        appWatch.setReport_content("...");
-        appWatch.setIs_not_interested(Integer.toString(rand.nextInt(2)));
-        appWatch.setShop_id(getRandomDigits(5));
-        appWatch.setShop_name(getCONTENT(3) + "特产店");
+        if ("1".equals(appWatch.getIs_report())){
+            appWatch.setReport_content(getCONTENT(5));
+        }else{
+            appWatch.setReport_content("0");
+        }
+        if ("0".equals(appWatch.getIs_like())){
+            appWatch.setIs_not_interested(Integer.toString(rand.nextInt(2)));
+        }else {
+            appWatch.setIs_not_interested(Integer.toString(0));
+        }
+        appWatch.setIs_go_shop(Integer.toString(rand.nextInt(2)));
+        if ("1".equals(appWatch.getIs_go_shop())){
+            appWatch.setShop_id(getRandomDigits(5));
+            appWatch.setShop_name(getCONTENT(3) + "特产店");
+        }else {
+            appWatch.setShop_id(Integer.toString(0));
+            appWatch.setShop_name(Integer.toString(0));
+        }
+
 
         return  (JSONObject) JSON.toJSON(appWatch);
 //        return  packEventJson("play","watch_video",jsonObject);
@@ -193,9 +209,6 @@ public class Main {
      */
     static JSONObject generaView(){
         AppView appView = new AppView();
-        appView.setAlg_match("match"+rand.nextInt(4));
-        appView.setAlg_rank("rank" +rand.nextInt(3));
-        appView.setRule("rule" + rand.nextInt(5));
         appView.setTrace_id("app" + rand.nextInt(3)+".scenes" + rand.nextInt(10)+ ".plan" + rand.nextInt(3)+".bucket" + rand.nextInt(4));
         appView.setUser_id(getRandomDigits(4));
         appView.setVideo_id(getRandomDigits(5));
@@ -210,13 +223,10 @@ public class Main {
      */
     static JSONObject generaClick(){
         AppClick appClick = new AppClick();
-        appClick.setAlg_match("match"+rand.nextInt(4));
-        appClick.setAlg_rank("rank" +rand.nextInt(3));
-        appClick.setRule("rule" + rand.nextInt(5));
         appClick.setTrace_id("app" + rand.nextInt(3)+".scenes" + rand.nextInt(10)+ ".plan" + rand.nextInt(3)+".bucket" + rand.nextInt(4));
         appClick.setUser_id(getRandomDigits(4));
         appClick.setVideo_id(getRandomDigits(5));
-        appClick.setBhv_amt(Float.intBitsToFloat(rand.nextInt(3)));
+        appClick.setOrder(Float.intBitsToFloat(rand.nextInt(3)));
 
         return (JSONObject) JSON.toJSON(appClick);
 //        return  packEventJson("click","click",jsonObject);
@@ -228,22 +238,11 @@ public class Main {
      */
     static JSONObject generaBehavior(){
         AppBehavior appBehavior = new AppBehavior();
-        appBehavior.setAlg_match("match"+rand.nextInt(4));
-        appBehavior.setAlg_rank("rank" +rand.nextInt(3));
-        appBehavior.setRule("rule" + rand.nextInt(5));
         appBehavior.setTrace_id("app" + rand.nextInt(3)+".scenes" + rand.nextInt(10)+ ".plan" + rand.nextInt(3)+".bucket" + rand.nextInt(4));
         appBehavior.setUser_id(getRandomDigits(4));
         appBehavior.setVideo_id(getRandomDigits(5));
-        appBehavior.setBhv_amt(Float.intBitsToFloat(rand.nextInt(3)));
-        int flag = rand.nextInt(2);
-        switch (flag) {
-            case (0):
-                appBehavior.setBhv_type("detail_click");
-                break;
-            case (1):
-                appBehavior.setBhv_type("detail_view");
-                break;
-        }
+        appBehavior.setOrder(Float.intBitsToFloat(rand.nextInt(3)));
+
         return (JSONObject) JSON.toJSON(appBehavior);
 //        return packEventJson("behavior","behavior",jsonObject);
     }
@@ -254,7 +253,7 @@ public class Main {
      */
     static JSONObject generaSearch(){
         AppSearch appSearch = new AppSearch();
-        appSearch.setSearch_content(getCONTENT(4));
+        appSearch.setSearch_content(getCONTENT(5));
         appSearch.setUser_id(getRandomDigits(4));
         return (JSONObject) JSON.toJSON(appSearch);
 //        return packEventJson("search_click","search_click",jsonObject);
@@ -266,13 +265,33 @@ public class Main {
      */
     static JSONObject generaGift(){
         AppGift appGift = new AppGift();
-        appGift.setContent(getCONTENT(4) + "特产店");
+        appGift.setContent(getCONTENT(3) + "特产店");
         appGift.setUser_id(getRandomDigits(4));
         appGift.setVideo_id(getRandomDigits(5));
         appGift.setTrace_id("app" + rand.nextInt(3)+".scenes" + rand.nextInt(10)+ ".plan" + rand.nextInt(3)+".bucket" + rand.nextInt(4));
 
         return (JSONObject) JSON.toJSON(appGift);
 //        return packEventJson("gift","gift",jsonObject);
+    }
+
+    /**
+     * 生成发布视频日志
+     * @return
+     */
+    static JSONObject generaRelease(){
+        AppReleaseVideo appReleaseVideo = new AppReleaseVideo();
+        appReleaseVideo.setUser_id(getRandomDigits(4));
+        appReleaseVideo.setVideo_id(getRandomDigits(5));
+        appReleaseVideo.setVideo_desc(getCONTENT(5));
+        appReleaseVideo.setVideo_tag(rand.nextInt(10) + "");
+        appReleaseVideo.setVideo_child_tag(getCONTENT(3));
+        appReleaseVideo.setVideo_long(getRandomDigits(3));
+        appReleaseVideo.setMusic_name(getCONTENT(4));
+        appReleaseVideo.setMusic_write(getCONTENT(3));
+        appReleaseVideo.setVideo_topic(getCONTENT(3));
+        appReleaseVideo.setVideo_address( getCONTENT(4));
+
+        return  (JSONObject) JSON.toJSON(appReleaseVideo);
     }
 
     /**
@@ -284,7 +303,7 @@ public class Main {
     static String getRandomDigits(int leng) {
 
         String result = "";
-        for (int i = 0; i <= leng; i++) {
+        for (int i = 0; i < leng; i++) {
             result += rand.nextInt(10);
         }
 
@@ -375,7 +394,7 @@ public class Main {
 
         String str = "";
 
-        for (int i = 0; i < rand.nextInt(len);i++) {
+        for (int i = 0; i < len;i++) {
             str+=getRandomChar();
         }
 
